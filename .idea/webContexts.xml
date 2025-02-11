@@ -3,11 +3,13 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/rooms-list.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/customer/montana-master/about.html" value="file://$PROJECT_DIR$/src/main/webapp/customer/montana-master" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/customer/montana-master/elements.html" value="file://$PROJECT_DIR$/src/main/webapp/customer/montana-master" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/customer/montana-master/index.html" value="file://$PROJECT_DIR$/src/main/webapp/customer/montana-master" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/customer/montana-master/rooms.html" value="file://$PROJECT_DIR$/src/main/webapp/customer/montana-master" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/customer/montana-master/single-blog.html" value="file://$PROJECT_DIR$/src/main/webapp/customer/montana-master" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
       </map>
     </option>
   </component>
