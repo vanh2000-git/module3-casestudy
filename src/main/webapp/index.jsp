@@ -138,7 +138,7 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="mb-3">
+                    <div class="mb-3" >
                         <label for="login-username" class="form-label">Tên đăng nhập</label>
                         <input type="text" class="form-control" id="login-username" placeholder="Nhập tên đăng nhập">
                     </div>
