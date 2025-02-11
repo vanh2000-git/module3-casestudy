@@ -1,5 +1,6 @@
 package com.example.module3casestudy.service.bookingAd;
 
+import com.example.module3casestudy.dto.BookingDTO;
 import com.example.module3casestudy.eNum.BookingStatusENum;
 import com.example.module3casestudy.model.Bookings;
 import com.example.module3casestudy.utils.DatabaseConnection;
@@ -19,15 +20,15 @@ public class BookingDAOImpl implements IBookingDAO {
     }
 
     @Override
-    public List<Bookings> getAllBookings() {
-        List<Bookings> bookingsList = new ArrayList<>();
-        String sql = "SELECT * FROM bookings";
+    public List<BookingDTO> getAllBookings() {
+        List<BookingDTO> bookingsList = new ArrayList<>();
+        String sql = "SELECT * FROM admin_booking_review";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                bookingsList.add(mapResultSetToBooking(rs));
+                bookingsList.add(mapResultSetToBookingDTO(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,15 +51,15 @@ public class BookingDAOImpl implements IBookingDAO {
     }
 
     @Override
-    public List<Bookings> getConfirmedBookings() {
-        List<Bookings> confirmedBookings = new ArrayList<>();
-        String sql = "SELECT * FROM bookings WHERE status = 'confirmed'";
+    public List<BookingDTO> getConfirmedBookings() {
+        List<BookingDTO> confirmedBookings = new ArrayList<>();
+        String sql = "SELECT * FROM admin_booking_review WHERE booking_status = 'confirmed'";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                confirmedBookings.add(mapResultSetToBooking(rs));
+                confirmedBookings.add(mapResultSetToBookingDTO(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,16 +109,19 @@ public class BookingDAOImpl implements IBookingDAO {
         return null;
     }
 
-    private Bookings mapResultSetToBooking(ResultSet rs) throws SQLException {
-        return new Bookings(
-                rs.getInt("id"),
-                rs.getInt("user_id"),
-                rs.getInt("room_id"),
-                rs.getDate("check_in").toLocalDate(),
-                rs.getDate("check_out").toLocalDate(),
-                BookingStatusENum.valueOf(rs.getString("status")),
-                rs.getDouble("total_amount")
-        );
+    private BookingDTO mapResultSetToBookingDTO(ResultSet rs) throws SQLException {
+        BookingDTO booking = new BookingDTO();
+        booking.setBookingId(rs.getInt("booking_id"));
+        booking.setCustomerName(rs.getString("customer_name"));
+        booking.setCustomerPhone(rs.getString("customer_phone"));
+        booking.setRoomName(rs.getString("room_name"));
+        booking.setRoomLocation(rs.getString("room_location"));
+        booking.setCheckIn(rs.getDate("check_in").toLocalDate());
+        booking.setCheckOut(rs.getDate("check_out").toLocalDate());
+        booking.setBookingStatus(rs.getString("booking_status"));
+        booking.setTotalAmount(rs.getDouble("total_amount"));
+        return booking;
     }
+
 
 }

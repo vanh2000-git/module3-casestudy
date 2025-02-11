@@ -1,5 +1,6 @@
 package com.example.module3casestudy.controller.bookingAD;
 
+import com.example.module3casestudy.dto.BookingDTO;
 import com.example.module3casestudy.model.Bookings;
 import com.example.module3casestudy.service.bookingAd.BookingDAOImpl;
 
@@ -17,7 +18,7 @@ public class BookingAdServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Bookings> bookings = bookingDAO.getAllBookings();
+        List<BookingDTO> bookings = bookingDAO.getAllBookings();
         request.setAttribute("bookings", bookings);
         request.getRequestDispatcher("BookingAD/bookingHistory.jsp").forward(request, response);
     }

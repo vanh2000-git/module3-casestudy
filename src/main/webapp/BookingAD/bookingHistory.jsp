@@ -50,23 +50,23 @@
 <table>
     <tr>
         <th>ID</th>
-        <th>User ID</th>
-        <th>Room ID</th>
+        <th>User</th>
+        <th>Room</th>
         <th>Check-in</th>
         <th>Check-out</th>
         <th>Status</th>
         <th>Total Amount</th>
     </tr>
     <c:forEach items="${bookings}" var="booking">
-    <tr>
-        <td>${booking.getId()}</td>
-        <td>${booking.getUser_id()}</td>
-        <td>${booking.getRoom_id()}</td>
-        <td>${booking.setCheck_in()}</td>
-        <td>${booking.getCheck_out()}</td>
-        <td>${booking.getStatus()}</td>
-        <td>$${booking.getTotal_amount()}</td>
-    </tr>
+        <tr>
+            <td>${booking.bookingId}</td>
+            <td>${booking.customerName} - ${booking.customerPhone}</td>
+            <td>${booking.roomName} - ${booking.roomLocation}</td>
+            <td>${booking.checkIn}</td>
+            <td>${booking.checkOut}</td>
+            <td>${booking.bookingStatus}</td>
+            <td>$${booking.totalAmount}</td>
+        </tr>
     </c:forEach>
 </table>
 
