@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: dungn
-  Date: 2/11/2025
-  Time: 3:28 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -40,12 +33,42 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+        .filter-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        select, button {
+            padding: 8px;
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
 
 <h2>Lịch sử Booking</h2>
-<h2>User List ${bookings.size()}</h2>
+
+<!-- Bộ lọc -->
+<div class="filter-container">
+    <form action="history_booking" method="GET">
+        <label for="location">Chọn địa điểm:</label>
+        <select name="location" id="location">
+            <option value="">-- Tất cả --</option>
+            <c:forEach items="${locations}" var="loc">
+                <option value="${loc}" ${param.location == loc ? 'selected' : ''}>${loc}</option>
+            </c:forEach>
+        </select>
+
+        <label for="status">Chọn trạng thái:</label>
+        <select name="status" id="status">
+            <option value="">-- Tất cả --</option>
+            <c:forEach items="${statuses}" var="st">
+                <option value="${st}" ${param.status == st ? 'selected' : ''}>${st}</option>
+            </c:forEach>
+        </select>
+
+        <button type="submit">Lọc</button>
+    </form>
+</div>
 
 <table>
     <tr>
@@ -68,8 +91,11 @@
             <td>$${booking.totalAmount}</td>
         </tr>
     </c:forEach>
+    <tr>
+        <td colspan="6" style="text-align: right; font-weight: bold;">Tổng tiền:</td>
+        <td style="font-weight: bold;">$${totalAmount}</td>
+    </tr>
 </table>
 
 </body>
 </html>
-

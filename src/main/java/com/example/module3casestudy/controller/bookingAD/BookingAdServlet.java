@@ -18,8 +18,19 @@ public class BookingAdServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<BookingDTO> bookings = bookingDAO.getAllBookings();
+        String location = request.getParameter("location");
+        String status = request.getParameter("status");
+
+        List<BookingDTO> bookings = bookingDAO.getFilteredBookings(location, status);
+        List<String> locations = bookingDAO.getAllLocations();
+        List<String> statuses = bookingDAO.getAllStatuses();
+
+        double totalAmount = bookings.stream().mapToDouble(BookingDTO::getTotalAmount).sum();
+
+        request.setAttribute("totalAmount", totalAmount);
         request.setAttribute("bookings", bookings);
-        request.getRequestDispatcher("BookingAD/bookingHistory.jsp").forward(request, response);
+        request.setAttribute("locations", locations);
+        request.setAttribute("statuses", statuses);
+        request.getRequestDispatcher("/BookingAD/bookingHistory.jsp").forward(request, response);
     }
 }

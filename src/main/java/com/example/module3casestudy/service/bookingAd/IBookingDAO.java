@@ -11,9 +11,7 @@ public interface IBookingDAO {
 
     boolean updateStatus(int bookingId, BookingStatusENum status);
 
-    List<BookingDTO> getConfirmedBookings();
-
-    double getTotalRevenue();
-
-    Bookings getBookingById(int bookingId);
+    List<BookingDTO> getFilteredBookings(String location, String status);
+    List<String> getAllLocations();
+    List<String> getAllStatuses();
 }
