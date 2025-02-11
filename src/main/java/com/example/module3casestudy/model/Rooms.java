@@ -1,14 +1,13 @@
 package com.example.module3casestudy.model;
 
 
-import com.example.module3casestudy.eNum.RoomLocationE;
 import com.example.module3casestudy.eNum.RoomStatusENum;
 
 public class Rooms {
     private int id;
     private String name;
     private String description;
-    RoomLocationE location;
+    private String location;
     private double price;
     private String img;
     RoomStatusENum status;
@@ -17,7 +16,7 @@ public class Rooms {
         this.status = RoomStatusENum.available;
     }
 
-    public Rooms(int id, String name, String description, RoomLocationE location, double price,String img) {
+    public Rooms(int id, String name, String description, String location, double price,String img) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -28,7 +27,7 @@ public class Rooms {
     }
 
 
-    public Rooms(String name, String description, RoomLocationE location, double price,String img , RoomStatusENum status) {
+    public Rooms(String name, String description, String location, double price,String img , RoomStatusENum status) {
         this.name = name;
         this.description = description;
         this.location = location;
@@ -61,11 +60,11 @@ public class Rooms {
         this.description = description;
     }
 
-    public RoomLocationE getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(RoomLocationE location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
@@ -108,4 +107,6 @@ public class Rooms {
                 ", status=" + status +
                 '}';
     }
+
+
 }

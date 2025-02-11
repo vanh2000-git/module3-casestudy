@@ -1,8 +1,6 @@
 package com.example.module3casestudy;
 
 import com.example.module3casestudy.eNum.BookingStatusENum;
-import com.example.module3casestudy.eNum.RoomLocationE;
-import com.example.module3casestudy.eNum.RoomStatusENum;
 import com.example.module3casestudy.model.Bookings;
 import com.example.module3casestudy.model.Reviews;
 import com.example.module3casestudy.model.Rooms;
@@ -18,9 +16,9 @@ public class Test {
         Users users2 = new Users(2, "SON", "0123123123", "hihi", "11");
         Users users3 = new Users(3, "QUAN", "0123123123", "hihi", "11");
 
-        Rooms room1 = new Rooms(1, "Room A", "Nice view", RoomLocationE.caugiay, 100.0, "roomA.jpg");
-        Rooms room2 = new Rooms(2, "Room B", "City center", RoomLocationE.hadong, 150.0, "roomB.jpg");
-        Rooms room3 = new Rooms(3, "Room C", "Sea view", RoomLocationE.thanhxuan, 200.0, "roomC.jpg");
+        Rooms room1 = new Rooms(1, "Room A", "Nice view", "caugiay", 100.0, "roomA.jpg");
+        Rooms room2 = new Rooms(2, "Room B", "City center", "caugiay", 150.0, "roomB.jpg");
+        Rooms room3 = new Rooms(3, "Room C", "Sea view", "caugiay", 200.0, "roomC.jpg");
 
         List<Bookings> bookingsList = Arrays.asList(
                 new Bookings(1, users.getId(), room1.getId(), LocalDate.of(2025, 3, 1), LocalDate.of(2025, 3, 5), BookingStatusENum.confirmed, room1.getPrice() * 4),
