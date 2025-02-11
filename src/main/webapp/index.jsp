@@ -141,8 +141,8 @@
                 <form action="/loginRegister" method="POST">
                     <input type="hidden" name="action" value="login">
                     <div class="mb-3">
-                        <label for="login-username" class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" id="login-username" name="username" placeholder="Nhập tên đăng nhập">
+                        <label for="login-userphone" class="form-label">Tên đăng nhập</label>
+                        <input type="text" class="form-control" id="login-userphone" name="phone" placeholder="Nhập số điện thoại đăng nhập">
                     </div>
                     <div class="mb-3">
                         <label for="login-password" class="form-label">Mật khẩu</label>
@@ -171,7 +171,7 @@
                     <input type="hidden" name="action" value="register">
                     <div class="mb-3">
                         <label for="register-username" class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" id="register-username" name="username" placeholder="Nhập tên đăng nhập">
+                        <input type="text" class="form-control" id="register-username" name="username" placeholder="Nhập tên">
                     </div>
                     <div class="mb-3">
                         <label for="register-phone" class="form-label">Phone</label>
