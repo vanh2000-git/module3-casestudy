@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -137,16 +138,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="mb-3" >
+                <form action="/loginRegister" method="POST">
+                    <input type="hidden" name="action" value="login">
+                    <div class="mb-3">
                         <label for="login-username" class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" id="login-username" placeholder="Nhập tên đăng nhập">
+                        <input type="text" class="form-control" id="login-username" name="username" placeholder="Nhập tên đăng nhập">
                     </div>
                     <div class="mb-3">
                         <label for="login-password" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" id="login-password" placeholder="Nhập mật khẩu">
+                        <input type="password" class="form-control" id="login-password" name="password" placeholder="Nhập mật khẩu">
                     </div>
-                    <button type="button" class="btn btn-primary-custom w-100" id="submitLogin">Đăng Nhập</button>
+                    <button type="submit" class="btn btn-primary-custom w-100">Đăng Nhập</button>
                     <p class="text-center mt-3">
                         Chưa có tài khoản? <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#registerModal">Đăng ký ngay</a>
                     </p>
@@ -165,21 +167,28 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="/loginRegister" method="POST">
+                    <input type="hidden" name="action" value="register">
                     <div class="mb-3">
                         <label for="register-username" class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" id="register-username" placeholder="Nhập tên đăng nhập">
+                        <input type="text" class="form-control" id="register-username" name="username" placeholder="Nhập tên đăng nhập">
                     </div>
                     <div class="mb-3">
-                        <label for="register-email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="register-email" placeholder="Nhập email">
+                        <label for="register-phone" class="form-label">Phone</label>
+                        <input type="number" class="form-control" id="register-phone" name="phone" placeholder="Nhập phone">
                     </div>
                     <div class="mb-3">
                         <label for="register-password" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" id="register-password" placeholder="Nhập mật khẩu">
+                        <input type="password" class="form-control" id="register-password" name="password" placeholder="Nhập mật khẩu">
                     </div>
-                    <button type="button" class="btn btn-primary-custom w-100" id="submitRegister">Đăng Ký</button>
+                    <div class="mb-3">
+                        <label for="register-image" class="form-label">Ảnh cá nhân</label>
+                        <input type="text" class="form-control" id="register-image" name="image" placeholder="Nhập đường dẫn">
+                    </div>
+                    <button type="submit" class="btn btn-primary-custom w-100">Đăng Ký</button>
                 </form>
+
+
             </div>
         </div>
     </div>
@@ -188,44 +197,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-    // Xử lý đăng nhập
-    document.getElementById("submitLogin").addEventListener("click", function () {
-        const username = document.getElementById("login-username").value;
-        const password = document.getElementById("login-password").value;
 
-        // Kiểm tra điều kiện đăng nhập (giả lập)
-        if (username === "admin" && password === "1234") {
-            alert("Đăng nhập thành công!");
-            const loginButton = document.querySelector(".btn-primary-custom[data-bs-target='#loginModal']");
-            loginButton.textContent = "Xin chào, Admin!";
-            loginButton.disabled = true;
-            loginButton.style.backgroundColor = "#6c757d";
-
-            // Ẩn modal
-            const loginModal = document.getElementById("loginModal");
-            const modalInstance = bootstrap.Modal.getInstance(loginModal);
-            modalInstance.hide();
-        } else {
-            alert("Tên đăng nhập hoặc mật khẩu không đúng!");
-        }
-    });
-
-    // Xử lý đăng ký (giả lập)
-    document.getElementById("submitRegister").addEventListener("click", function () {
-        const username = document.getElementById("register-username").value;
-        const email = document.getElementById("register-email").value;
-        const password = document.getElementById("register-password").value;
-
-        if (username && email && password) {
-            alert("Đăng ký thành công! Bạn có thể đăng nhập ngay.");
-            const registerModal = document.getElementById("registerModal");
-            const modalInstance = bootstrap.Modal.getInstance(registerModal);
-            modalInstance.hide();
-        } else {
-            alert("Vui lòng điền đầy đủ thông tin.");
-        }
-    });
-</script>
 </body>
 </html>

@@ -15,7 +15,7 @@ public class RoomsServiceImpl implements  IRoomsService{
 
     @Override
     public void create(Rooms rooms) {
-        rooms.add(rooms);
+//        rooms.add(rooms);
     }
 
     @Override
