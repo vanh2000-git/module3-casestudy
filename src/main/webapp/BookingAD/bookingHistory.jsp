@@ -70,6 +70,15 @@
     </form>
 </div>
 
+<c:if test="${not empty sessionScope.message}">
+    <p style="color: green; text-align: center;">${sessionScope.message}</p>
+    <c:remove var="message" scope="session"/>
+</c:if>
+<c:if test="${not empty sessionScope.error}">
+    <p style="color: red; text-align: center;">${sessionScope.error}</p>
+    <c:remove var="error" scope="session"/>
+</c:if>
+
 <table>
     <tr>
         <th>ID</th>
@@ -87,7 +96,17 @@
             <td>${booking.roomName} - ${booking.roomLocation}</td>
             <td>${booking.checkIn}</td>
             <td>${booking.checkOut}</td>
-            <td>${booking.bookingStatus}</td>
+            <td>
+                <form action="history_booking" method="POST">
+                    <input type="hidden" name="bookingId" value="${booking.bookingId}" />
+                    <select name="status">
+                        <c:forEach items="${statuses}" var="st">
+                            <option value="${st}" ${booking.bookingStatus == st ? 'selected' : ''}>${st}</option>
+                        </c:forEach>
+                    </select>
+                    <button type="submit">Cập nhật</button>
+                </form>
+            </td>
             <td>$${booking.totalAmount}</td>
         </tr>
     </c:forEach>

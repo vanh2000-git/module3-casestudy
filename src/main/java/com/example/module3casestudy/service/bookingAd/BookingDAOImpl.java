@@ -2,7 +2,6 @@ package com.example.module3casestudy.service.bookingAd;
 
 import com.example.module3casestudy.dto.BookingDTO;
 import com.example.module3casestudy.eNum.BookingStatusENum;
-import com.example.module3casestudy.model.Bookings;
 import com.example.module3casestudy.utils.DatabaseConnection;
 
 import java.sql.Connection;
@@ -17,23 +16,6 @@ public class BookingDAOImpl implements IBookingDAO {
 
     public BookingDAOImpl() {
         this.connection = DatabaseConnection.getConnection();
-    }
-
-    @Override
-    public List<BookingDTO> getAllBookings() {
-        List<BookingDTO> bookingsList = new ArrayList<>();
-        String sql = "SELECT * FROM admin_booking_review";
-
-        try (PreparedStatement stmt = connection.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                bookingsList.add(mapResultSetToBookingDTO(rs));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return bookingsList;
     }
 
     @Override
@@ -123,5 +105,10 @@ public class BookingDAOImpl implements IBookingDAO {
             e.printStackTrace();
         }
         return statuses;
+    }
+
+    @Override
+    public double getTotalAmount(List<BookingDTO> bookings) {
+        return bookings.stream().mapToDouble(BookingDTO::getTotalAmount).sum();
     }
 }
