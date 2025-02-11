@@ -13,13 +13,13 @@ public class Bookings {
     BookingStatusENum status;
     private double total_amount;
 
-    public Bookings(int id, int user_id, int room_id, LocalDate check_in, LocalDate check_out, double total_amount) {
+    public Bookings(int id, int user_id, int room_id, LocalDate check_in, LocalDate check_out,BookingStatusENum status, double total_amount) {
         this.id = id;
         this.user_id = user_id;
         this.room_id = room_id;
         this.check_in = check_in;
         this.check_out = check_out;
-        this.status = BookingStatusENum.pending;
+        this.status = status;
         this.total_amount = total_amount;
     }
 
@@ -27,12 +27,12 @@ public class Bookings {
         this.status = BookingStatusENum.pending;
     }
 
-    public Bookings(int user_id, int room_id, LocalDate check_in, LocalDate check_out, double total_amount) {
+    public Bookings(int user_id, int room_id, LocalDate check_in, LocalDate check_out, BookingStatusENum status, double total_amount) {
         this.user_id = user_id;
         this.room_id = room_id;
         this.check_in = check_in;
         this.check_out = check_out;
-        this.status = BookingStatusENum.pending;
+        this.status = status;
         this.total_amount = total_amount;
     }
 

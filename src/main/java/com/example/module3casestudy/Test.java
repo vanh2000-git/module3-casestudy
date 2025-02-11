@@ -23,9 +23,9 @@ public class Test {
         Rooms room3 = new Rooms(3, "Room C", "Sea view", RoomLocationE.thanhxuan, 200.0, "roomC.jpg");
 
         List<Bookings> bookingsList = Arrays.asList(
-                new Bookings(1, users.getId(), room1.getId(), LocalDate.of(2025, 3, 1), LocalDate.of(2025, 3, 5), room1.getPrice() * 4),
-                new Bookings(2, users2.getId(), room2.getId(), LocalDate.of(2025, 4, 10), LocalDate.of(2025, 4, 15), room2.getPrice() * 5),
-                new Bookings(3, users3.getId(), room3.getId(), LocalDate.of(2025, 5, 20), LocalDate.of(2025, 5, 25), room3.getPrice() * 5)
+                new Bookings(1, users.getId(), room1.getId(), LocalDate.of(2025, 3, 1), LocalDate.of(2025, 3, 5), BookingStatusENum.confirmed, room1.getPrice() * 4),
+                new Bookings(2, users2.getId(), room2.getId(), LocalDate.of(2025, 4, 10), LocalDate.of(2025, 4, 15),BookingStatusENum.canceled, room2.getPrice() * 5),
+                new Bookings(3, users3.getId(), room3.getId(), LocalDate.of(2025, 5, 20), LocalDate.of(2025, 5, 25),BookingStatusENum.canceled, room3.getPrice() * 5)
         );
 
         for (Bookings booking : bookingsList) {
