@@ -2,6 +2,7 @@
 <<<<<<< HEAD
 =======
 src/main/java/resources/database.properties
+src/main/java/com/example/module3casestudy/utils/DatabaseConnection.java
 >>>>>>> 29b4704bc331d73a684d73b930a73a7d9e5d41d4
 build/
 !gradle/wrapper/gradle-wrapper.jar
