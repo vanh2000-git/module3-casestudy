@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -56,24 +57,17 @@
         <th>Status</th>
         <th>Total Amount</th>
     </tr>
+    <c:forEach items="${bookings}" var="booking">
     <tr>
-        <td>1</td>
-        <td>101</td>
-        <td>202</td>
-        <td>2025-02-01</td>
-        <td>2025-02-05</td>
-        <td>Confirmed</td>
-        <td>$500</td>
+        <td>${booking.getId()}</td>
+        <td>${booking.getUser_id()}</td>
+        <td>${booking.getRoom_id()}</td>
+        <td>${booking.setCheck_in()}</td>
+        <td>${booking.getCheck_out()}</td>
+        <td>${booking.getStatus()}</td>
+        <td>$${booking.getTotal_amount()}</td>
     </tr>
-    <tr>
-        <td>2</td>
-        <td>102</td>
-        <td>205</td>
-        <td>2025-02-10</td>
-        <td>2025-02-15</td>
-        <td>Pending</td>
-        <td>$750</td>
-    </tr>
+    </c:forEach>
 </table>
 
 </body>
