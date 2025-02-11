@@ -1,10 +1,13 @@
 .gradle
+.src/main/java/resources/database.properties
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 
 ### IntelliJ IDEA ###
+.idea/dataSources.xml
+.idea/webContext.xml
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
