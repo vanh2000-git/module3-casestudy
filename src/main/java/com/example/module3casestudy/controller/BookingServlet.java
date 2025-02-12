@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "customerBooking", value = "/customerBooking")
 public class BookingServlet extends HttpServlet {
@@ -63,10 +64,7 @@ public class BookingServlet extends HttpServlet {
         if (para != null && !para.isEmpty()) {
             int userId = Integer.parseInt(para);
 
-
-
-            List<Bookings> bookings = bookingService.getAllBookings(userId);
-
+            List<Map<String, Object>> bookings = bookingService.getAllBookingsWithDetails(userId);
             req.setAttribute("bookings", bookings);
             req.setAttribute("userId", userId);
 
