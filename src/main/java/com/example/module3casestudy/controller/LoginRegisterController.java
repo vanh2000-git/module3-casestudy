@@ -4,7 +4,6 @@ import com.example.module3casestudy.eNum.UserEnum;
 import com.example.module3casestudy.model.Users;
 import com.example.module3casestudy.repositories.IUserRepository;
 import com.example.module3casestudy.repositories.UserRepository;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,10 +45,14 @@ public class LoginRegisterController extends HttpServlet {
                 System.out.println("Đã đăng nhập thành công : " );
                 UserEnum role = iUserRepository.GetRoleOfUser(phone);
 
+                Users users = iUserRepository.GetUserByPhone(phone);
+
                 if(role == UserEnum.admin) {
                     resp.sendRedirect("adminPage.jsp");
                 } else {
-                    resp.sendRedirect("customerPage.jsp");
+                    req.setAttribute("userName", users.getName());
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("/customerPage.jsp");
+                    dispatcher.forward(req, resp);
                 }
             } else {
                 RequestDispatcher dispatcher = req.getRequestDispatcher("/errorPage.jsp");
