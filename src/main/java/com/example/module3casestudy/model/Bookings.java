@@ -23,7 +23,7 @@ public class Bookings {
         this.total_amount = total_amount;
     }
 
-    public Bookings() {
+    public Bookings(int id, int userId, int roomId, LocalDate checkIn, LocalDate checkOut, String bookingStatus, double totalAmount) {
         this.status = BookingStatusENum.pending;
     }
 

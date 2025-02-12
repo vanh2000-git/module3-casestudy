@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface IBookingService {
     public boolean createBooking(int userId, int roomId, String checkIn, String checkOut, double totalAmount);
-
-    List<Bookings> getAllBookings();
+    public boolean cancelBooking(int bookingId);
+    List<Bookings> getAllBookings(int user_id);
 }
