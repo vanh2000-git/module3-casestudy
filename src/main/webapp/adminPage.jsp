@@ -12,5 +12,6 @@
 </head>
 <body>
 <h1>Admin Page - Trang quản trị</h1>
+<a href="/rooms"> abc</a>
 </body>
 </html>
