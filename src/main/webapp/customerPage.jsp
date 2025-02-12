@@ -45,7 +45,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Trang Chủ</a>
+                    <a class="nav-link active" href="index.jsp">Trang Chủ</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Dịch Vụ</a>
@@ -68,6 +68,8 @@
         </div>
         <div class="col-md-9">
             <h3 class="mb-4">Danh Sách Dịch Vụ</h3>
+            <a href="customerBooking?userId=${userId}">Danh sách đã đặt</a>
+            <a href="booking-form.jsp?userId=${userId}">Đặt phòng ngay</a>
             <div class="row">
 
                 <c:forEach var="room" items="${roomList}">

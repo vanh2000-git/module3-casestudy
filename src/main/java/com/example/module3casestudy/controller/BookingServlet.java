@@ -21,7 +21,15 @@ public class BookingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        int userId = Integer.parseInt(req.getParameter("userId")); // Lấy userId từ form
+        String userIdParam = req.getParameter("userId");
+
+        if (userIdParam == null || userIdParam.isEmpty()) {
+            req.setAttribute("error", "❌ Lỗi: User ID không hợp lệ!");
+            req.getRequestDispatcher("error-page.jsp").forward(req, resp);
+            return;
+        }
+
+        int userId = Integer.parseInt(userIdParam); // Parse userId khi hợp lệ
 
         if ("cancel".equals(action)) {
             int bookingId = Integer.parseInt(req.getParameter("bookingId"));
@@ -44,7 +52,7 @@ public class BookingServlet extends HttpServlet {
             }
         }
 
-        // Chuyển hướng kèm theo userId
+        // ✅ Sau khi xử lý, chuyển về trang danh sách đặt phòng
         resp.sendRedirect("customerBooking?userId=" + userId);
     }
 
@@ -52,15 +60,15 @@ public class BookingServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String para = req.getParameter("userId");
 
-        if (para == null) {
-            req.getRequestDispatcher("booking-form.jsp").forward(req, resp);
-        } else {
+        if (para != null && !para.isEmpty()) {
             int userId = Integer.parseInt(para);
             List<Bookings> bookings = bookingService.getAllBookings(userId);
 
             req.setAttribute("bookings", bookings);
             req.setAttribute("userId", userId);
             req.getRequestDispatcher("bookings.jsp").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("booking-form.jsp").forward(req, resp);
         }
     }
 
