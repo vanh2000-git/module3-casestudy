@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: dungn
-  Date: 2/11/2025
-  Time: 3:28 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -39,43 +33,88 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+        .filter-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        select, button {
+            padding: 8px;
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
 
 <h2>Lịch sử Booking</h2>
-<h2>User List ${bookings.size()}</h2>
+
+<!-- Bộ lọc -->
+<div class="filter-container">
+    <form action="history_booking" method="GET">
+        <label for="location">Chọn địa điểm:</label>
+        <select name="location" id="location">
+            <option value="">-- Tất cả --</option>
+            <c:forEach items="${locations}" var="loc">
+                <option value="${loc}" ${param.location == loc ? 'selected' : ''}>${loc}</option>
+            </c:forEach>
+        </select>
+
+        <label for="status">Chọn trạng thái:</label>
+        <select name="status" id="status">
+            <option value="">-- Tất cả --</option>
+            <c:forEach items="${statuses}" var="st">
+                <option value="${st}" ${param.status == st ? 'selected' : ''}>${st}</option>
+            </c:forEach>
+        </select>
+
+        <button type="submit">Lọc</button>
+    </form>
+</div>
+
+<c:if test="${not empty sessionScope.message}">
+    <p style="color: green; text-align: center;">${sessionScope.message}</p>
+    <c:remove var="message" scope="session"/>
+</c:if>
+<c:if test="${not empty sessionScope.error}">
+    <p style="color: red; text-align: center;">${sessionScope.error}</p>
+    <c:remove var="error" scope="session"/>
+</c:if>
 
 <table>
     <tr>
         <th>ID</th>
-        <th>User ID</th>
-        <th>Room ID</th>
+        <th>User</th>
+        <th>Room</th>
         <th>Check-in</th>
         <th>Check-out</th>
         <th>Status</th>
         <th>Total Amount</th>
     </tr>
+    <c:forEach items="${bookings}" var="booking">
+        <tr>
+            <td>${booking.bookingId}</td>
+            <td>${booking.customerName} - ${booking.customerPhone}</td>
+            <td>${booking.roomName} - ${booking.roomLocation}</td>
+            <td>${booking.checkIn}</td>
+            <td>${booking.checkOut}</td>
+            <td>
+                <form action="history_booking" method="POST">
+                    <input type="hidden" name="bookingId" value="${booking.bookingId}" />
+                    <select name="status">
+                        <c:forEach items="${statuses}" var="st">
+                            <option value="${st}" ${booking.bookingStatus == st ? 'selected' : ''}>${st}</option>
+                        </c:forEach>
+                    </select>
+                    <button type="submit">Cập nhật</button>
+                </form>
+            </td>
+            <td>$${booking.totalAmount}</td>
+        </tr>
+    </c:forEach>
     <tr>
-        <td>1</td>
-        <td>101</td>
-        <td>202</td>
-        <td>2025-02-01</td>
-        <td>2025-02-05</td>
-        <td>Confirmed</td>
-        <td>$500</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>102</td>
-        <td>205</td>
-        <td>2025-02-10</td>
-        <td>2025-02-15</td>
-        <td>Pending</td>
-        <td>$750</td>
+        <td colspan="6" style="text-align: right; font-weight: bold;">Tổng tiền:</td>
+        <td style="font-weight: bold;">$${totalAmount}</td>
     </tr>
 </table>
 
 </body>
 </html>
-

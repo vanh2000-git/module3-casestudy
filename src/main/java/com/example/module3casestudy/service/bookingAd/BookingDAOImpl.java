@@ -1,7 +1,7 @@
 package com.example.module3casestudy.service.bookingAd;
 
+import com.example.module3casestudy.dto.BookingDTO;
 import com.example.module3casestudy.eNum.BookingStatusENum;
-import com.example.module3casestudy.model.Bookings;
 import com.example.module3casestudy.utils.DatabaseConnection;
 
 import java.sql.Connection;
@@ -19,23 +19,6 @@ public class BookingDAOImpl implements IBookingDAO {
     }
 
     @Override
-    public List<Bookings> getAllBookings() {
-        List<Bookings> bookingsList = new ArrayList<>();
-        String sql = "SELECT * FROM bookings";
-
-        try (PreparedStatement stmt = connection.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                bookingsList.add(mapResultSetToBooking(rs));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return bookingsList;
-    }
-
-    @Override
     public boolean updateStatus(int bookingId, BookingStatusENum status) {
         String sql = "UPDATE bookings SET status = ? WHERE id = ?";
 
@@ -49,75 +32,83 @@ public class BookingDAOImpl implements IBookingDAO {
         }
     }
 
-    @Override
-    public List<Bookings> getConfirmedBookings() {
-        List<Bookings> confirmedBookings = new ArrayList<>();
-        String sql = "SELECT * FROM bookings WHERE status = 'confirmed'";
-
-        try (PreparedStatement stmt = connection.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                confirmedBookings.add(mapResultSetToBooking(rs));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return confirmedBookings;
+    private BookingDTO mapResultSetToBookingDTO(ResultSet rs) throws SQLException {
+        BookingDTO booking = new BookingDTO();
+        booking.setBookingId(rs.getInt("booking_id"));
+        booking.setCustomerName(rs.getString("customer_name"));
+        booking.setCustomerPhone(rs.getString("customer_phone"));
+        booking.setRoomName(rs.getString("room_name"));
+        booking.setRoomLocation(rs.getString("room_location"));
+        booking.setCheckIn(rs.getDate("check_in").toLocalDate());
+        booking.setCheckOut(rs.getDate("check_out").toLocalDate());
+        booking.setBookingStatus(BookingStatusENum.valueOf(rs.getString("booking_status").toLowerCase()));
+        booking.setTotalAmount(rs.getDouble("total_amount"));
+        return booking;
     }
 
     @Override
-    public double getTotalRevenue() {
-        String sql = "SELECT SUM(total_amount) FROM bookings WHERE status = 'completed'";
-        double totalRevenue = 0;
+    public List<BookingDTO> getFilteredBookings(String location, String status) {
+        List<BookingDTO> bookings = new ArrayList<>();
+        StringBuilder sql = new StringBuilder("SELECT * FROM admin_booking_review WHERE 1=1");
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-
-            if (rs.next()) {
-                totalRevenue = rs.getDouble(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (location != null && !location.isEmpty()) {
+            sql.append(" AND room_location = ?");
         }
-        return totalRevenue;
-    }
+        if (status != null && !status.isEmpty()) {
+            sql.append(" AND booking_status = ?");
+        }
+        sql.append(" ORDER BY check_in DESC");
 
-    @Override
-    public Bookings getBookingById(int bookingId) {
-        String sql = "SELECT * FROM bookings WHERE id = ?";
-
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, bookingId);
+        try (PreparedStatement stmt = connection.prepareStatement(sql.toString())) {
+            int paramIndex = 1;
+            if (location != null && !location.isEmpty()) {
+                stmt.setString(paramIndex++, location);
+            }
+            if (status != null && !status.isEmpty()) {
+                stmt.setString(paramIndex++, status);
+            }
             ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return new Bookings(
-                        rs.getInt("id"),
-                        rs.getInt("user_id"),
-                        rs.getInt("room_id"),
-                        rs.getDate("check_in").toLocalDate(),
-                        rs.getDate("check_out").toLocalDate(),
-                        BookingStatusENum.valueOf(rs.getString("status")),
-                        rs.getDouble("total_amount")
-                );
+            while (rs.next()) {
+                bookings.add(mapResultSetToBookingDTO(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return bookings;
     }
 
-    private Bookings mapResultSetToBooking(ResultSet rs) throws SQLException {
-        return new Bookings(
-                rs.getInt("id"),
-                rs.getInt("user_id"),
-                rs.getInt("room_id"),
-                rs.getDate("check_in").toLocalDate(),
-                rs.getDate("check_out").toLocalDate(),
-                BookingStatusENum.valueOf(rs.getString("status")),
-                rs.getDouble("total_amount")
-        );
+    @Override
+    public List<String> getAllLocations() {
+        List<String> locations = new ArrayList<>();
+        String sql = "SELECT DISTINCT room_location FROM admin_booking_review";
+        try (PreparedStatement stmt = connection.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                locations.add(rs.getString("room_location"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return locations;
     }
 
+    @Override
+    public List<String> getAllStatuses() {
+        List<String> statuses = new ArrayList<>();
+        String sql = "SELECT DISTINCT booking_status FROM admin_booking_review";
+        try (PreparedStatement stmt = connection.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                statuses.add(rs.getString("booking_status"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return statuses;
+    }
+
+    @Override
+    public double getTotalAmount(List<BookingDTO> bookings) {
+        return bookings.stream().mapToDouble(BookingDTO::getTotalAmount).sum();
+    }
 }
