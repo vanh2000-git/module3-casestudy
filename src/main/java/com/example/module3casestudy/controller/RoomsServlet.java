@@ -119,15 +119,15 @@ public class RoomsServlet extends HttpServlet {
     }
 
     private void createRoom(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-String name =req.getParameter("name");
-String description =req.getParameter("description");
-String location =req.getParameter("location");
-double price = Double.parseDouble(req.getParameter("price"));
-String img =req.getParameter("img");
-RoomStatusENum status = RoomStatusENum.valueOf(req.getParameter("status").toLowerCase());
+        String name =req.getParameter("name");
+        String description =req.getParameter("description");
+        String location =req.getParameter("location");
+        double price = Double.parseDouble(req.getParameter("price"));
+        String img =req.getParameter("img");
+        RoomStatusENum status = RoomStatusENum.valueOf(req.getParameter("status").toLowerCase());
 
 
-Rooms room = new Rooms(name,description,location,price,img,status);
+        Rooms room = new Rooms(name,description,location,price,img,status);
         System.out.println(room);
         try {
             service.save(room);
@@ -137,5 +137,3 @@ Rooms room = new Rooms(name,description,location,price,img,status);
         }
     }
 }
-
-
