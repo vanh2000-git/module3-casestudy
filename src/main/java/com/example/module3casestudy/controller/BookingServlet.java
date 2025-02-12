@@ -62,10 +62,14 @@ public class BookingServlet extends HttpServlet {
 
         if (para != null && !para.isEmpty()) {
             int userId = Integer.parseInt(para);
+
+
+
             List<Bookings> bookings = bookingService.getAllBookings(userId);
 
             req.setAttribute("bookings", bookings);
             req.setAttribute("userId", userId);
+
             req.getRequestDispatcher("bookings.jsp").forward(req, resp);
         } else {
             req.getRequestDispatcher("booking-form.jsp").forward(req, resp);

@@ -34,14 +34,16 @@
     <h2>Book a Room</h2>
     <%
         String userId = request.getParameter("userId");
+        String roomId = request.getParameter("roomId");
     %>
 
     <form action="customerBooking" method="post">
         <input type="hidden" name="userId" value="<%= userId %>">
 
-        <label for="roomId">Room ID:</label>
-        <input type="number" id="roomId" name="roomId" required>
-
+        <label>Room ID: <%= roomId %>"</label>
+        <br>
+<%--        <input type="number" id="roomId" name="roomId value="<%= roomId %>">--%>
+        <input type="hidden" name="roomId" value="<%= roomId %>">
         <label for="checkIn">Check-in Date:</label>
         <input type="date" id="checkIn" name="checkIn" required>
 

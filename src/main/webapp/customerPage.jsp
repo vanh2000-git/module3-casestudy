@@ -80,7 +80,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">${room.name}</h5>
                                 <p class="card-text">Giá: ${room.price} VNĐ</p>
-                                <a href="/booking?roomId=${room.id}" class="btn btn-primary-custom w-100">Đặt Phòng</a>
+                                <a href="booking-form.jsp?userId=${userId}&roomId=${room.id}" class="btn btn-primary-custom w-100">Đặt Phòng</a>
                             </div>
                         </div>
                     </div>
