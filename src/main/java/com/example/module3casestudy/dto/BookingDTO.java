@@ -1,5 +1,7 @@
 package com.example.module3casestudy.dto;
 
+import com.example.module3casestudy.eNum.BookingStatusENum;
+
 import java.time.LocalDate;
 
 public class BookingDTO {
@@ -10,10 +12,10 @@ public class BookingDTO {
     private String roomLocation;
     private LocalDate checkIn;
     private LocalDate checkOut;
-    private String bookingStatus;
+    private BookingStatusENum bookingStatus;
     private double totalAmount;
 
-    public BookingDTO(int bookingId, String customerName, String customerPhone, String roomName, String roomLocation, LocalDate checkIn, LocalDate checkOut, String bookingStatus, double totalAmount) {
+    public BookingDTO(int bookingId, String customerName, String customerPhone, String roomName, String roomLocation, LocalDate checkIn, LocalDate checkOut, BookingStatusENum bookingStatus, double totalAmount) {
         this.bookingId = bookingId;
         this.customerName = customerName;
         this.customerPhone = customerPhone;
@@ -26,7 +28,6 @@ public class BookingDTO {
     }
 
     public BookingDTO() {
-
     }
 
     public int getBookingId() {
@@ -57,7 +58,7 @@ public class BookingDTO {
         return checkOut;
     }
 
-    public String getBookingStatus() {
+    public BookingStatusENum getBookingStatus() {
         return bookingStatus;
     }
 
@@ -93,7 +94,7 @@ public class BookingDTO {
         this.checkOut = checkOut;
     }
 
-    public void setBookingStatus(String bookingStatus) {
+    public void setBookingStatus(BookingStatusENum bookingStatus) {
         this.bookingStatus = bookingStatus;
     }
 

@@ -41,7 +41,7 @@ public class BookingDAOImpl implements IBookingDAO {
         booking.setRoomLocation(rs.getString("room_location"));
         booking.setCheckIn(rs.getDate("check_in").toLocalDate());
         booking.setCheckOut(rs.getDate("check_out").toLocalDate());
-        booking.setBookingStatus(rs.getString("booking_status"));
+        booking.setBookingStatus(BookingStatusENum.valueOf(rs.getString("booking_status").toLowerCase()));
         booking.setTotalAmount(rs.getDouble("total_amount"));
         return booking;
     }
