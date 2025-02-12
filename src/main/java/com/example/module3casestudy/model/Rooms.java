@@ -26,6 +26,15 @@ public class Rooms {
         this.status = RoomStatusENum.available;
     }
 
+    public Rooms( String name, String description, String location, double price,String img) {
+        this.name = name;
+        this.description = description;
+        this.location = location;
+        this.price = price;
+        this.img = img;
+        this.status = RoomStatusENum.available;
+    }
+
 
     public Rooms(String name, String description, String location, double price,String img , RoomStatusENum status) {
         this.name = name;

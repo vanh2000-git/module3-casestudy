@@ -124,10 +124,10 @@ public class RoomsServlet extends HttpServlet {
         String location =req.getParameter("location");
         double price = Double.parseDouble(req.getParameter("price"));
         String img =req.getParameter("img");
-        RoomStatusENum status = RoomStatusENum.valueOf(req.getParameter("status").toLowerCase());
+//        RoomStatusENum status = RoomStatusENum.valueOf(req.getParameter("status").toLowerCase());
 
 
-        Rooms room = new Rooms(name,description,location,price,img,status);
+        Rooms room = new Rooms(name,description,location,price,img);
         System.out.println(room);
         try {
             service.save(room);

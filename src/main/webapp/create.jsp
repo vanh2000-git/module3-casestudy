@@ -84,7 +84,7 @@
     <input type="text" name="location" placeholder="Location">
     <input type="number" name="price" placeholder="Price">
     <input type="text" name="img" placeholder="Hinh anh">
-    <input type="text" name="status" placeholder="status">
+<%--    <input type="text" name="status" placeholder="status">--%>
 
 
     <button type = "submit"> Submit </button>
