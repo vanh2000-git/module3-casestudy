@@ -48,8 +48,11 @@ public class LoginRegisterController extends HttpServlet {
                 Users users = iUserRepository.GetUserByPhone(phone);
 
                 if(role == UserEnum.admin) {
-                    resp.sendRedirect("adminPage.jsp");
+                    req.setAttribute("users", users);
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("/adminPage.jsp");
+                    dispatcher.forward(req, resp);
                 } else {
+                    req.setAttribute("users", users);
                     req.setAttribute("userName", users.getName());
                     RequestDispatcher dispatcher = req.getRequestDispatcher("/customerPage.jsp");
                     dispatcher.forward(req, resp);
@@ -82,7 +85,6 @@ public class LoginRegisterController extends HttpServlet {
 
             System.out.println("Đã đăng ký thành công vơi phone : " + phoneNumber );
         }catch(Exception ex) {
-            // redirect error page
             RequestDispatcher dispatcher = req.getRequestDispatcher("/errorPage.jsp");
             req.setAttribute("errorMessage", "Tài khoản đăng ký thất bại , vui lòng đăng ký lại");
             dispatcher.forward(req, resp);
