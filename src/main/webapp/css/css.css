@@ -1,0 +1,48 @@
+/* Thêm CSS tùy chỉnh */
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-modal .modal-content,
+.register-modal .modal-content {
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary-custom {
+    background-color: #007bff;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-primary-custom:hover {
+    background-color: #0056b3;
+}
+
+.hero {
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+    border-radius: 0 0 30px 30px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+#carouselExampleRide {
+    height: 600px;
+    overflow: hidden;
+}
+
+/* Đảm bảo hình ảnh không bị biến dạng */
+#carouselExampleRide img {
+    height: 600px;
+    object-fit: cover;
+}

@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lịch sử Booking</title>
+    <link rel="stylesheet" href="../css/css.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,7 +48,24 @@
 <body>
 
 <h2>Lịch sử Booking</h2>
-
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-primary" href="#">C1024G1</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/rooms">Room</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <!-- Bộ lọc -->
 <div class="filter-container">
     <form action="history_booking" method="GET">
@@ -115,6 +134,11 @@
         <td style="font-weight: bold;">$${totalAmount}</td>
     </tr>
 </table>
-
+<footer class="bg-white mt-5 py-3">
+    <div class="container text-center">
+        <p>&copy; 2025 - C1024G1. Tất cả các quyền được bảo lưu.</p>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
