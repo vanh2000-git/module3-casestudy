@@ -77,18 +77,17 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public boolean ValidateUser(String phone, String password) {
-        Users user = GetUserByPhone(phone); // map tu datbase ve User model
+        Users user = GetUserByPhone(phone);
 
         if(Objects.equals(user.getPhone(), phone)){
             return Objects.equals(user.getPassword(), password);
         }
-
         return false;
     }
 
     @Override
     public UserEnum GetRoleOfUser(String phone) {
-        Users user = GetUserByPhone(phone); // map tu datbase ve User model
+        Users user = GetUserByPhone(phone);
         return user.getRole();
     }
 }

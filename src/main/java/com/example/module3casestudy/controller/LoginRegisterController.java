@@ -4,18 +4,15 @@ import com.example.module3casestudy.eNum.UserEnum;
 import com.example.module3casestudy.model.Users;
 import com.example.module3casestudy.repositories.IUserRepository;
 import com.example.module3casestudy.repositories.UserRepository;
-import com.example.module3casestudy.utils.DatabaseConnection;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 
 @WebServlet(name = "loginRegister", value = "/loginRegister")
 public class LoginRegisterController extends HttpServlet {
@@ -33,44 +30,43 @@ public class LoginRegisterController extends HttpServlet {
                 handleRegister(req, resp);
                 break;
             default:
-                resp.setContentType("text/html;charset=UTF-8");
-                resp.getWriter().write("<h3>Hành động không hợp lệ</h3>");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/errorPage.jsp");
+                req.setAttribute("errorMessage", "Lỗi xử lý lại ");
+                dispatcher.forward(req, resp);
                 break;
         }
     }
 
-    private void handleLogin(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void handleLogin(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
             String phone = req.getParameter("phone");
             String password = req.getParameter("password");
 
             if(iUserRepository.ValidateUser(phone, password)) {
                 System.out.println("Đã đăng nhập thành công : " );
-                // Dang nhap thanh cong => get quyen cua user
-                // Lay quyen cua User
                 UserEnum role = iUserRepository.GetRoleOfUser(phone);
 
                 if(role == UserEnum.admin) {
-                    //  Redirect Admin Page
                     resp.sendRedirect("adminPage.jsp");
                 } else {
-                    // Redirect Customer Page
                     resp.sendRedirect("customerPage.jsp");
                 }
             } else {
-                // Redirect error page
-                System.out.println("Đăng nhập thất bại : " );
-                resp.sendRedirect("errorPage.jsp");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/errorPage.jsp");
+                req.setAttribute("errorMessage", "Đăng nhập thất bại");
+                dispatcher.forward(req, resp);
+
+
             }
 
         } catch (Exception ex) {
-            // redirect error page
-            System.out.println("Đăng nhập thất bại : " );
-            resp.sendRedirect("errorPage.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/errorPage.jsp");
+            req.setAttribute("errorMessage", "Đăng nhập thất bại");
+            dispatcher.forward(req, resp);
         }
     }
 
-    private void handleRegister(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void handleRegister(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try{
             String username = req.getParameter("username");
             String phone = req.getParameter("phone");
@@ -84,8 +80,9 @@ public class LoginRegisterController extends HttpServlet {
             System.out.println("Đã đăng ký thành công vơi phone : " + phoneNumber );
         }catch(Exception ex) {
             // redirect error page
-            System.out.println("Đăng ký thất bại");
-            resp.sendRedirect("errorPage.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/errorPage.jsp");
+            req.setAttribute("errorMessage", "Tài khoản đăng ký thất bại , vui lòng đăng ký lại");
+            dispatcher.forward(req, resp);
         }
     }
 }
