@@ -87,13 +87,13 @@
 <div id="carouselExampleRide" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1500">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="/img/anhso1.jpg" class="d-block w-100" alt="...">
+            <img src="https://image.cnbcfm.com/api/v1/image/107430852-17187937171718793715-35021164885-1080pnbcnews.jpg?v=1718793716" class="d-block w-100" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="/img/anhso2.png" alt="...">
+            <img src="https://images.unsplash.com/photo-1561501900-3701fa6a0864?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bHV4dXJ5JTIwaG90ZWx8ZW58MHx8MHx8fDA%3D" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="/img/anhso3.png" class="d-block w-100" alt="...">
+            <img src="https://www.lottehotel.com/content/dam/lotte-hotel/lotte/saigon/accommodation/executive-floor/executive-river-view/4261-06-1920-acc-LTHO.jpg.thumb.1920.1920.jpg" class="d-block w-100" alt="...">
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
@@ -107,14 +107,6 @@
 </div>
 
 
-
-
-<!-- Hero Section -->
-<div class="hero">
-    <div class="container">
-
-    </div>
-</div>
 
 <!-- Nội dung chính -->
 <div class="container mt-5">

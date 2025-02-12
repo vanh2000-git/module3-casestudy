@@ -25,11 +25,36 @@
         .btn-primary-custom {
             background-color: #007bff;
             border: none;
-            transition: 0.3s;
+            transition: all 0.3s ease-in-out;
         }
 
         .btn-primary-custom:hover {
             background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .room-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .room-card:hover {
+            transform: scale(1.03);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .user-badge {
+            background-color: #dc3545;
+            color: white;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
         }
     </style>
 </head>
@@ -48,14 +73,11 @@
                     <a class="nav-link active" href="index.jsp">Trang Chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Dịch Vụ</a>
+                    <a class="nav-link" href="customerBooking?userId=${userId}">Danh sách đơn đã đặt</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Liên Hệ</a>
+                <li class="nav-item ms-3">
+                    <span class="user-badge">${userName}</span>
                 </li>
-                <form action="" method="POST" class="ms-3">
-                    <p class="btn btn-danger">${userName}</p>
-                </form>
             </ul>
         </div>
     </div>
@@ -64,27 +86,27 @@
 <!-- Hero Section -->
 <div class="container mt-5 pt-5">
     <div class="row">
-        <div class="col-md-3">
-        </div>
+        <div class="col-md-3"></div>
         <div class="col-md-9">
-            <h3 class="mb-4">Danh Sách Dịch Vụ</h3>
-            <a href="customerBooking?userId=${userId}">Danh sách đã đặt</a>
-            <a href="booking-form.jsp?userId=${userId}">Đặt phòng ngay</a>
+            <h3 class="mb-4">Danh Sách Phòng</h3>
             <div class="row">
 
-                <c:forEach var="room" items="${roomList}">
-                    <div class="col-md-4 mb-3">
-                        <div class="card h-100">
-                            <img src="${room.image}" class="card-img-top" alt="Room Image">
-                            <div class="card-body">
-                                <h5 class="card-title">${room.name}</h5>
-                                <p class="card-text">Giá: ${room.price} VNĐ</p>
-                                <p class="card-text">Loại Phòng: ${room.type}</p>
-                                <a href="/booking?roomId=${room.id}" class="btn btn-primary-custom w-100">Đặt Phòng</a>
+                <c:forEach var="room" items="${rooms}">
+                    <c:if test="${room.status == 'available'}">  <%-- Chỉ hiển thị phòng có status = available --%>
+                        <div class="col-md-4 mb-4">
+                            <div class="card room-card">
+                                <img src="${room.img}" class="card-img-top" alt="Room Image">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">${room.name}</h5>
+                                    <p class="card-text fw-bold text-danger">Giá: ${room.price} VNĐ</p>
+                                    <a href="booking-form.jsp?userId=${userId}&roomId=${room.id}&roomPrice=${room.price}"
+                                       class="btn btn-primary-custom w-100">Đặt Phòng</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </c:if>
                 </c:forEach>
+
 
             </div>
         </div>
@@ -94,7 +116,7 @@
 <!-- Footer -->
 <footer class="bg-white mt-5 py-3">
     <div class="container text-center">
-        <p>&copy; 2025 - C1024G1. Tất cả các quyền được bảo lưu.</p>
+        <p class="mb-0">&copy; 2025 - C1024G1. Tất cả các quyền được bảo lưu.</p>
     </div>
 </footer>
 
