@@ -52,7 +52,7 @@ public class RoomsServlet extends HttpServlet {
             return;
         }
         req.setAttribute("room", room);
-        req.getRequestDispatcher("/WEB-INF/edit.jsp").forward(req, resp);
+        req.getRequestDispatcher("/edit.jsp").forward(req, resp);
     }
 
     private void deleteRoom(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -69,7 +69,7 @@ public class RoomsServlet extends HttpServlet {
 
 
     private void showFormCreate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/create.jsp").forward(req, resp);
+        req.getRequestDispatcher("/create.jsp").forward(req, resp);
     }
 
     private void showRoom(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -81,7 +81,7 @@ public class RoomsServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 //    chuyen huong sang view
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/rooms-list.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/rooms-list.jsp");
         req.setAttribute("rooms", rooms);
         requestDispatcher.forward(req, resp);
     }
