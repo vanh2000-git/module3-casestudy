@@ -68,18 +68,18 @@
         </div>
         <div class="col-md-9">
             <h3 class="mb-4">Danh Sách Dịch Vụ</h3>
+            <h1>Lói đê${rooms.size()}</h1>
             <a href="customerBooking?userId=${userId}">Danh sách đã đặt</a>
             <a href="booking-form.jsp?userId=${userId}">Đặt phòng ngay</a>
             <div class="row">
 
-                <c:forEach var="room" items="${roomList}">
+                <c:forEach var="room" items="${rooms}">
                     <div class="col-md-4 mb-3">
                         <div class="card h-100">
-                            <img src="${room.image}" class="card-img-top" alt="Room Image">
+                            <img src="${room.img}" class="card-img-top" alt="Room Image">
                             <div class="card-body">
                                 <h5 class="card-title">${room.name}</h5>
                                 <p class="card-text">Giá: ${room.price} VNĐ</p>
-                                <p class="card-text">Loại Phòng: ${room.type}</p>
                                 <a href="/booking?roomId=${room.id}" class="btn btn-primary-custom w-100">Đặt Phòng</a>
                             </div>
                         </div>

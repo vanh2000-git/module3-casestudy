@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -52,11 +53,18 @@ public class LoginRegisterController extends HttpServlet {
                     RequestDispatcher dispatcher = req.getRequestDispatcher("/adminPage.jsp");
                     dispatcher.forward(req, resp);
                 } else {
-                    req.setAttribute("users", users);
-                    req.setAttribute("userName", users.getName());
-                    req.setAttribute("userId", users.getId());
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("/customerPage.jsp");
-                    dispatcher.forward(req, resp);
+//                    req.setAttribute("users", users);
+//                    req.setAttribute("userName", users.getName());
+//                    req.setAttribute("userId", users.getId());
+//                    RequestDispatcher dispatcher = req.getRequestDispatcher("/customerPage.jsp");
+//                    dispatcher.forward(req, resp);
+
+                    HttpSession session = req.getSession();
+                    session.setAttribute("users", users);
+                    session.setAttribute("userName", users.getName());
+                    session.setAttribute("userId", users.getId());
+
+                    resp.sendRedirect("roomlist");
                 }
             } else {
                 RequestDispatcher dispatcher = req.getRequestDispatcher("/errorPage.jsp");
