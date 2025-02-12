@@ -68,6 +68,8 @@
         </div>
         <div class="col-md-9">
             <h3 class="mb-4">Danh Sách Dịch Vụ</h3>
+            <a href="customerBooking?userId=${userId}">Danh sách đã đặt</a>
+            <a href="booking-form.jsp?userId=${userId}">Đặt phòng ngay</a>
             <div class="row">
 
                 <c:forEach var="room" items="${roomList}">

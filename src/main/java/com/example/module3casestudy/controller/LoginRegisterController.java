@@ -54,6 +54,7 @@ public class LoginRegisterController extends HttpServlet {
                 } else {
                     req.setAttribute("users", users);
                     req.setAttribute("userName", users.getName());
+                    req.setAttribute("userId", users.getId());
                     RequestDispatcher dispatcher = req.getRequestDispatcher("/customerPage.jsp");
                     dispatcher.forward(req, resp);
                 }
