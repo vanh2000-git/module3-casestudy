@@ -13,5 +13,10 @@ public interface IRoomsService {
 
     void save(Rooms rooms) throws SQLException;
 
+    Rooms findById(int roomId);
+
+
+    boolean updateRoom(int roomId, Rooms updatedRoom);
+    boolean deleteRoom(int roomId);
 
 }

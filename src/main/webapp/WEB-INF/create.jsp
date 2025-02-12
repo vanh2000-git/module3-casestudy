@@ -11,13 +11,14 @@
     <title></title>
 </head>
 <body>
-<form action="create" method="post">
+<form action="rooms?action=create" method="post">
 
     <input type="text" name="name" placeholder="Name">
     <input type="text" name="description" placeholder="Description">
     <input type="text" name="location" placeholder="Location">
     <input type="number" name="price" placeholder="Price">
-    <input type="number" name="price" placeholder="Price">
+    <input type="text" name="img" placeholder="Hinh anh">
+    <input type="text" name="status" placeholder="Status">
 
     <button type = "submit"> Submit </button>
 </form>

@@ -32,6 +32,12 @@
     <td>${r.getPrice()}</td>
     <td>${r.getImg()}</td>
     <td>${r.getStatus()}</td>
+    <td>
+        <a href="rooms?action=edit&id=${r.id}" >Edit</a>
+
+        <a href="rooms?action=delete&id=${r.id}"
+           onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Delete</a>
+    </td>
 </tr>
 
 </c:forEach>
