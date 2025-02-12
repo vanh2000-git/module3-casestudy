@@ -51,6 +51,7 @@ public class LoginRegisterController extends HttpServlet {
                     resp.sendRedirect("adminPage.jsp");
                 } else {
                     req.setAttribute("userName", users.getName());
+                    req.setAttribute("userId", users.getId());
                     RequestDispatcher dispatcher = req.getRequestDispatcher("/customerPage.jsp");
                     dispatcher.forward(req, resp);
                 }

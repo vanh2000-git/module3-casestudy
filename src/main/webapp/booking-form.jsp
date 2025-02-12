@@ -32,9 +32,12 @@
 
 <div class="container">
     <h2>Book a Room</h2>
+    <%
+        String userId = request.getParameter("userId");
+    %>
+
     <form action="customerBooking" method="post">
-        <label for="userId">User ID:</label>
-        <input type="number" id="userId" name="userId" required>
+        <input type="hidden" name="userId" value="<%= userId %>">
 
         <label for="roomId">Room ID:</label>
         <input type="number" id="roomId" name="roomId" required>
