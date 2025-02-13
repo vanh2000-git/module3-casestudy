@@ -92,7 +92,11 @@ public class LoginRegisterController extends HttpServlet {
 
             String phoneNumber = iUserRepository.InsertUser(users);
 
-            System.out.println("Đã đăng ký thành công vơi phone : " + phoneNumber );
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
+            req.setAttribute("successMessage" ,"Số tài khoản" + phoneNumber +" đăng ký thành công ");
+            dispatcher.forward(req, resp);
+
+
         }catch(Exception ex) {
             RequestDispatcher dispatcher = req.getRequestDispatcher("/errorPage.jsp");
             req.setAttribute("errorMessage", "Tài khoản đăng ký thất bại , vui lòng đăng ký lại");
