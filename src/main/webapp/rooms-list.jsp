@@ -135,7 +135,7 @@
     <td>${r.getDescription()}</td>
     <td>${r.getLocation()}</td>
     <td>${r.getPrice()}</td>
-    <td>${r.getImg()}</td>
+    <td><img src="${r.getImg()}" class="card-img-top" alt="Room Image"></td>
     <td>${r.getStatus()}</td>
     <td>
         <a href="rooms?action=edit&id=${r.id}" >Edit</a>
