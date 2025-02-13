@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/hostel_booking_system_c10";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "saxdas123";
+    private static final String PASSWORD = "@Chuanhquan1211z";
 
     // Sử dụng Singleton để đảm bảo chỉ có một instance của Connection
     private static Connection connection;
